@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.jaxvy.slidemenudemo.util.SlideMenuAnimationContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/slideMenuAnimationContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- SlideMenu contents must reside in a LinearLayout with id: slideMenuLinearLayout -->
+    <LinearLayout
+        android:id="@id/slideMenuLinearLayout"
+        android:layout_width="200dip"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <!-- slideMenuLinearLayout must contain ListView with id: slideMenuListView -->
+        <ListView
+            android:id="@id/slideMenuListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+	<!-- Activity contents must reside in a LinearLayout with id: @id/contentLinearLayout -->
+    <LinearLayout
+        android:id="@id/contentLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#999999"
+        android:clickable="true"
+        android:orientation="vertical" >
+
+        <!-- You can replace this button with another widget. Doing so requires updating button's setOnClickListener -->
+        <Button
+            android:id="@+id/content_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu" />
+
+       <!--  You can put the rest of the content here -->       
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity 3"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+</com.android.jaxvy.slidemenudemo.util.SlideMenuAnimationContainer>
