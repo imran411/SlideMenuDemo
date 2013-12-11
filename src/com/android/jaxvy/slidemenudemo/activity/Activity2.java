@@ -9,29 +9,27 @@ import android.os.Bundle;
 
 public class Activity2 extends Activity {
 
-	private SlideMenuAnimationContainer slideMenuAnimationContainer;
-	
-	@Override
-	public void onCreate( Bundle savedInstanceState){
+    private SlideMenuAnimationContainer slideMenuAnimationContainer;
 
-		super.onCreate( savedInstanceState);
-		setContentView( R.layout.activity2_layout);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity2_layout);
 
-		slideMenuAnimationContainer = (SlideMenuAnimationContainer) findViewById( R.id.slideMenuAnimationContainer);	
-		
-		SlideMenu slideMenu = new SlideMenu( this, slideMenuAnimationContainer);
-		slideMenuAnimationContainer.setListener( slideMenu);		
-		slideMenu.init();
-	}
+        slideMenuAnimationContainer = (SlideMenuAnimationContainer) findViewById(R.id.slideMenuAnimationContainer);
 
-	@Override
-	public void onBackPressed(){
+        SlideMenu slideMenu = new SlideMenu(this, slideMenuAnimationContainer);
+        slideMenuAnimationContainer.setListener(slideMenu);
+        slideMenu.init();
+    }
 
-		if( slideMenuAnimationContainer.isOpening()) {
-			slideMenuAnimationContainer.closeSlideMenu();
-		}
-		else {
-			finish();
-		}
-	}	
+    @Override
+    public void onBackPressed() {
+        if (slideMenuAnimationContainer.isOpening()) {
+            slideMenuAnimationContainer.closeSlideMenu();
+        }
+        else {
+            finish();
+        }
+    }
 }
