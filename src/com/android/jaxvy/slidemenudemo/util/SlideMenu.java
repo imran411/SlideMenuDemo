@@ -21,94 +21,100 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class SlideMenu implements SlideMenuAnimationContainer.Listener {
 
-	public final static String[] slideMenuOptions = { "Activity 1", "Activity 2", "Activity 3" };
-	public final static String TAG = "SlideMenu";
+    public final static String[] slideMenuOptions = { "Activity 1", "Activity 2", "Activity 3" };
+    public final static String TAG = "SlideMenu";
 
-	private Context context;
-	private SlideMenuAnimationContainer slideMenuAnimationContainer;
+    private Context context;
+    private SlideMenuAnimationContainer slideMenuAnimationContainer;
 
-	public SlideMenu( Context context, SlideMenuAnimationContainer mainAnimationLayout){
+    public SlideMenu(Context context, SlideMenuAnimationContainer mainAnimationLayout) {
 
-		this.context = context;
-		this.slideMenuAnimationContainer = mainAnimationLayout;
-	}
+        this.context = context;
+        this.slideMenuAnimationContainer = mainAnimationLayout;
+    }
 
-	public void init(){
+    public void init() {
 
-		final Activity activity = (Activity) context;
+        final Activity activity = (Activity) context;
 
-		//Set Content's show menu button's action
-		Button showMenuButton = (Button) activity.findViewById( R.id.content_button);
-		showMenuButton.setOnClickListener( new OnClickListener(){
+        // Set Content's show menu button's action
+        Button showMenuButton = (Button) activity.findViewById(R.id.content_button);
+        showMenuButton.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick( View v){
+            @Override
+            public void onClick(View v) {
 
-				slideMenuAnimationContainer.toggleSlideMenu();
-			}
-		});
+                slideMenuAnimationContainer.toggleSlideMenu();
+            }
+        });
 
-		//Call slideMenuAnimationContainer.closeSlideMenuAndActOnClick() is called to act the implemented logic.
-		//You can integrate you custom adapter here
-		ListView menuListView = (ListView) activity.findViewById( R.id.slideMenuListView);
-		menuListView.setAdapter( new ArrayAdapter<String>( context, android.R.layout.simple_list_item_1, slideMenuOptions));
-		menuListView.setOnItemClickListener( new OnItemClickListener(){
+        // Call slideMenuAnimationContainer.closeSlideMenuAndActOnClick() is
+        // called to act the implemented logic.
+        // You can integrate you custom adapter here
+        ListView menuListView = (ListView) activity.findViewById(R.id.slideMenuListView);
+        menuListView
+                .setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, slideMenuOptions));
+        menuListView.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick( AdapterView<?> parent, View view, int position, long id){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				// Close sidebar
-				slideMenuAnimationContainer.closeSlideMenuAndActOnClick( parent, view, position, id);
-			}
-		});
-		
-		//Implement your logic here within the execute() function when an item is clicked with in the SlideMenu
-		//Called after the SlideMenu collapses.
-		slideMenuAnimationContainer.setMenuItemSelectedAction( new MenuItemSelectedAction(){
+                // Close sidebar
+                slideMenuAnimationContainer.closeSlideMenuAndActOnClick(parent, view, position, id);
+            }
+        });
 
-			@Override
-			public void execute( AdapterView<?> parent, View view, int position, long id){
+        // Implement your logic here within the execute() function when an item
+        // is clicked with in the SlideMenu
+        // Called after the SlideMenu collapses.
+        slideMenuAnimationContainer.setMenuItemSelectedAction(new MenuItemSelectedAction() {
 
-				//Start new activity
-				CharSequence selectedActivityName = ((TextView) view).getText();
+            @Override
+            public void execute(AdapterView<?> parent, View view, int position, long id) {
 
-				Intent intent;
-				if( selectedActivityName.equals( slideMenuOptions[0])) {
-					intent = new Intent( activity, Activity1.class);
-				}
-				else if( selectedActivityName.equals( slideMenuOptions[1])) {
-					intent = new Intent( activity, Activity2.class);
-				}
-				else {
-					intent = new Intent( activity, Activity3.class);
-				}
-				intent.setFlags( Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				activity.startActivity( intent);
-			}
-		});
-	}
+                // Start new activity
+                CharSequence selectedActivityName = ((TextView) view).getText();
 
-	//Callback of SlideMenuAnimationContainer.Listener to monitor status of SlideMenu
-	@Override
-	public void onSlideMenuOpened(){
+                Intent intent;
+                if (selectedActivityName.equals(slideMenuOptions[0])) {
+                    intent = new Intent(activity, Activity1.class);
+                }
+                else if (selectedActivityName.equals(slideMenuOptions[1])) {
+                    intent = new Intent(activity, Activity2.class);
+                }
+                else {
+                    intent = new Intent(activity, Activity3.class);
+                }
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                activity.startActivity(intent);
+            }
+        });
+    }
 
-		Log.d( TAG, "opened");
-	}
+    // Callback of SlideMenuAnimationContainer.Listener to monitor status of
+    // SlideMenu
+    @Override
+    public void onSlideMenuOpened() {
 
-	//Callback of SlideMenuAnimationContainer.Listener to monitor status of SlideMenu
-	@Override
-	public void onSlideMenuClosed(){
+        Log.d(TAG, "opened");
+    }
 
-		Log.d( TAG, "closed");
-	}
+    // Callback of SlideMenuAnimationContainer.Listener to monitor status of
+    // SlideMenu
+    @Override
+    public void onSlideMenuClosed() {
 
-	//Callback of SlideMenuAnimationContainer.Listener to monitor status of SlideMenu
-	@Override
-	public boolean onContentTouchedWhenOpening(){
+        Log.d(TAG, "closed");
+    }
 
-		//The content area is touched when sidebar opening, close sidebar
-		Log.d( TAG, "going to close sidebar");
-		slideMenuAnimationContainer.closeSlideMenu();
-		return true;
-	}
+    // Callback of SlideMenuAnimationContainer.Listener to monitor status of
+    // SlideMenu
+    @Override
+    public boolean onContentTouchedWhenOpening() {
+
+        // The content area is touched when sidebar opening, close sidebar
+        Log.d(TAG, "going to close sidebar");
+        slideMenuAnimationContainer.closeSlideMenu();
+        return true;
+    }
 }
